@@ -100,5 +100,5 @@ getData()
 	.then((people) => organisePeopleForPets(people))
 	.then((pets) => filterPetsByType(pets, 'Cat'))
 	.then((pets) => sortByOwner(pets, 'gender'))
-	.then((pets) => displayData(pets));
+	.then((pets) => displayData(pets, 'container', 'pets', 'name'));
 

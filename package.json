@@ -8,7 +8,7 @@
     "test": "jest --watchAll"
   },
   "keywords": [],
-  "author": "",
+  "author": "Carlo Cruz",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.10.2",
