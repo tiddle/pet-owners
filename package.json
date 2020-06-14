@@ -2,7 +2,7 @@
 	"name": "agl-pets",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "index.html",
 	"scripts": {
 		"dev": "webpack-dev-server --watch",
 		"test": "jest --watchAll",
