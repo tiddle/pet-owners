@@ -7,7 +7,7 @@ import { displayData } from './view';
  */
 export async function getData() {
 	// Could use axios instead of fetch here
-	const peopleData = await fetch('http://agl-developer-test.azurewebsites.net/people.json').catch(err => console.log(err));
+	const peopleData = await fetch('//agl-developer-test.azurewebsites.net/people.json').catch(err => console.log(err));
 	const peopleJson = await peopleData.json();
 
 	return peopleJson;
