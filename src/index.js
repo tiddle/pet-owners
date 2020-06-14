@@ -1,11 +1,13 @@
-// Note: I would generally put these in separat JS files, but this project is so small, it would be easier to read the code if it were in 1 file.
+import { displayData } from './view';
+
+// Note: I would generally put these in separate JS files, but this project is so small, it would be easier to read the code if it were in 1 file. 
 
 /**
  * Retrieve data from API 
  */
 export async function getData() {
-	// This should point to the live json, but I didn't want to have to create a server just to avoid CORS issues
-	const peopleData = await fetch('/people.json').catch(err => console.log(err));
+	// Could use axios instead of fetch here
+	const peopleData = await fetch('http://agl-developer-test.azurewebsites.net/people.json').catch(err => console.log(err));
 	const peopleJson = await peopleData.json();
 
 	return peopleJson;
@@ -64,20 +66,26 @@ export function filterPetsByType(petArr, type = 'Cat') {
  * Organise petArr into an object sorted by every unique `sort`
  * 
  * @param {Array} petArr 
- * @param {String} sort 
+ * @param {String} sort
  */
 export function sortByOwner(petArr, sort = 'gender') {
+	const sortString = String(sort);
+	if(sortString === '[object Object]' || sortString === '') {
+		return {}
+	}
+
+
 	if (petArr && petArr.length > 0 && Array.isArray(petArr)) {
 		return petArr.reduce((acc, curr) => {
-			if(curr.owner && curr.owner[sort]) {
-				if(!acc[curr.owner[sort]]) {
-					acc[curr.owner[sort]] = {
-						sortName: curr.owner[sort],
+			if(curr.owner && curr.owner[sortString]) {
+				if(!acc[curr.owner[sortString]]) {
+					acc[curr.owner[sortString]] = {
+						sortName: curr.owner[sortString],
 						pets: []
 					};
 				}
 
-				acc[curr.owner[sort]].pets.push(curr);
+				acc[curr.owner[sortString]].pets.push(curr);
 			}
 
 
@@ -92,4 +100,5 @@ getData()
 	.then((people) => organisePeopleForPets(people))
 	.then((pets) => filterPetsByType(pets, 'Cat'))
 	.then((pets) => sortByOwner(pets, 'gender'))
-	.then((arr) => console.log(arr));
+	.then((pets) => displayData(pets));
+
